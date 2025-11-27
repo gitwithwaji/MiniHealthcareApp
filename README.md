@@ -1,25 +1,24 @@
 # MiniHealthcareApp
 This repository is a test demo for automating test cases on a Healthcare application. The repo is not a final version of any testing frameworks.
 
-Project Structure
------------------
+# Project Structure 
 
-healthcare-demo/                        # repo root (or keep as separate repos)
+```healthcare-demo/                        # repo root (or keep as separate repos)
 ├── minihealthcare-app/                 # Full-stack app (backend + frontend)
-│   ├── backend/
-│   │   ├── package.json
-│   │   └── server.js
-│   └── frontend/
-│       ├── package.json
-│       └── src/
-│           ├── App.js
-│           ├── index.js
-│           └── pages/
-│               ├── PatientRegistration.js
-│               ├── Appointment.js
-│               └── Claims.js
-├── healthcare-qa-automation/           # Automation framework + scripts
-│   ├── pom.xml
+│   ├── backend/ <br>
+│   │   ├── package.json <br>
+│   │   └── server.js <br>
+│   └── frontend/ <br>
+│       ├── package.json <br>
+│       └── src/ <br>
+│           ├── App.js <br>
+│           ├── index.js <br>
+│           └── pages/ <br>
+│               ├── PatientRegistration.js <br>
+│               ├── Appointment.js <br>
+│               └── Claims.js <br>
+├── healthcare-qa-automation/           # Automation framework + scripts <br>
+│   ├── pom.xml <br>
 │   ├── src/
 │   │   ├── main/java/com/healthcare/...
 │   │   └── test/java/com/healthcare/...
