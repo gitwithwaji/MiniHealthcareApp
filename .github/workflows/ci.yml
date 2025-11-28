@@ -1,4 +1,4 @@
-name: Java CI
+name: MERN + Selenium CI
 
 on:
   push:
@@ -10,16 +10,53 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      # Setup mongodb
+      mongo:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Set up Java for Maven
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: temurin    # Must specify
+          distribution: temurin
           java-version: 17
           cache: maven
 
-      - name: Build with Maven
-        run: mvn clean test
+      # Set up Node.js for frontend/backend
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      # Install backend dependencies (if any)
+      - name: Install backend
+        run: |
+          cd backend
+          npm install
+
+      # Install frontend dependencies and build
+      - name: Install frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      # Setup ChromeDriver for headless Selenium tests
+      - name: Setup ChromeDriver
+        uses: nanasess/setup-chromedriver@v1
+        with:
+          chromedriver-version: 'latest'
+
+      # Run Maven Selenium tests
+      - name: Run Maven Tests
+        run: |
+          cd tests  # <-- change this if your pom.xml is elsewhere
+          mvn clean test
