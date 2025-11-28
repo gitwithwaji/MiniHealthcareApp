@@ -5,24 +5,51 @@ This repository is a test demo for automating test cases on a Healthcare applica
 
 ```healthcare-demo/                        # repo root (or keep as separate repos)
 ├── minihealthcare-app/                 # Full-stack app (backend + frontend)
-│   ├── backend/ <br>
-│   │   ├── package.json <br>
-│   │   └── server.js <br>
-│   └── frontend/ <br>
-│       ├── package.json <br>
-│       └── src/ <br>
-│           ├── App.js <br>
-│           ├── index.js <br>
-│           └── pages/ <br>
-│               ├── PatientRegistration.js <br>
-│               ├── Appointment.js <br>
-│               └── Claims.js <br>
-├── healthcare-qa-automation/           # Automation framework + scripts <br>
-│   ├── pom.xml <br>
-│   ├── src/
-│   │   ├── main/java/com/healthcare/...
-│   │   └── test/java/com/healthcare/...
-│   └── .github/workflows/ci.yml
+├── backend/
+│   ├── package.json
+│   ├── server.js
+│   ├── .env
+│   │
+│   ├── config/
+│   │   └── db.js
+│   │
+│   ├── models/
+│   │   ├── Patient.js
+│   │   ├── Appointment.js
+│   │   └── Claim.js
+│   │
+│   └── routes/
+│       ├── patientRoutes.js
+│       ├── appointmentRoutes.js
+│       └── claimRoutes.js
+healthcare-qa-automation/
+│   ├── pom.xml
+│   └── src/
+│       ├── main/
+│       │   └── java/
+│       │       └── com/healthcare/
+│       │           └── config/
+│       │               └── ConfigLoader.java
+│       └── test/
+│           └── java/
+│               └── com/healthcare/
+│                   ├── api/
+│                   │   ├── PatientApiTests.java
+│                   │   ├── AppointmentApiTests.java
+│                   │   └── ClaimsApiTests.java
+│                   ├── ui/
+│                   │   ├── PatientRegistrationUITest.java
+│                   │   ├── AppointmentUITest.java
+│                   │   └── ClaimsUITest.java
+│                   ├── performance/
+│                   │   └── LoadTests.java
+│                   └── utils/
+│                       ├── BaseTest.java
+│                       └── TestDataGenerator.java
+│
+│   └── .github/
+│       └── workflows/
+│           └── ci.yml
 └── docs/
     ├── TestPlan_HealthcareDemo.md
     ├── RTM_HealthcareDemo.xlsx (or .csv)

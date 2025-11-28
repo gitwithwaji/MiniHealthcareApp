@@ -1,0 +1,12 @@
+{
+  "name": "minihealthcareapp",
+  "version": "1.0.0",
+  "description": "This repository is a test demo for automating test cases on a Healthcare application. The repo is not a final version of any testing frameworks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
