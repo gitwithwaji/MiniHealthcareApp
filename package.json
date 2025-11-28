@@ -4,7 +4,15 @@
   "description": "This repository is a test demo for automating test cases on a Healthcare application. The repo is not a final version of any testing frameworks.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "dev:server": "cd backend && nodemon server.js",
+    "test:api": "cd healthcare-qa-automation && mvn test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.1.11"
   },
   "keywords": [],
   "author": "",

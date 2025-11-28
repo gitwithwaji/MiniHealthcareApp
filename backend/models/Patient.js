@@ -6,7 +6,11 @@ const PatientSchema = new mongoose.Schema({
   age: Number,
   gender: String,
   email: { type: String, required: true },
-  phone: String
+  phone: String,
+  symptoms: String,
+  conditions: String,
+  riskLevel: String,
+  recommendedSpecialist: String
 }, { timestamps: true });
 
 module.exports = mongoose.model("Patient", PatientSchema);

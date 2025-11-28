@@ -3,6 +3,9 @@ import axios from "axios";
 
 function App() {
   const [patients, setPatients] = useState([]);
+  const [age, setAge] = useState([]);
+   const [symptoms, setSymptoms] = useState("");
+  const [conditions, setConditions] = useState("");
   const [appointments, setAppointments] = useState([]);
   const [claims, setClaims] = useState([]);
 
@@ -10,7 +13,10 @@ function App() {
     firstName: "",
     lastName: "",
     email: "",
-    phone: ""
+    phone: "",
+    age: "",
+    symptoms: "",
+    conditions: ""
   });
 
   const [appointmentForm, setAppointmentForm] = useState({
@@ -39,7 +45,12 @@ function App() {
   };
 
   const savePatient = async () => {
-    await axios.post("http://localhost:5000/api/patients", patientForm);
+    await axios.post("http://localhost:5000/api/patients/", {
+    ...patientForm,
+    age,
+    symptoms,
+    conditions
+  });
     fetchAll();
   };
 
@@ -61,6 +72,10 @@ function App() {
       <input placeholder="Last Name" onChange={(e) => setPatientForm({ ...patientForm, lastName: e.target.value })}/>
       <input placeholder="Email" onChange={(e) => setPatientForm({ ...patientForm, email: e.target.value })}/>
       <input placeholder="Phone" onChange={(e) => setPatientForm({ ...patientForm, phone: e.target.value })}/>
+      <input placeholder="Age" value={age} type="number" onChange={(e) => setAge(e.target.value)}/>
+      <input placeholder="Symptoms" value={symptoms} onChange={(e) => setSymptoms(e.target.value)} />
+      <input placeholder="Existing Conditions" value={conditions} onChange={(e) => setConditions(e.target.value)} />
+
       <button onClick={savePatient}>Save Patient</button>
 
       <h2>Appointment Form</h2>
@@ -79,19 +94,27 @@ function App() {
 
       <h2>Patients</h2>
       <table border="1">
-        <tr><th>Name</th><th>Email</th><th>Phone</th></tr>
+        <thead>
+        <tr><th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Symptoms</th><th>Existing Conditions</th></tr></thead>
+        <tbody>
         {patients.map(p => (
           <tr key={p._id}>
             <td>{p.firstName} {p.lastName}</td>
             <td>{p.email}</td>
             <td>{p.phone}</td>
+            <td>{p.age}</td>
+            <td><p>Risk Level: {p.riskLevel}</p></td>
+            <td><p>Recommended Specialist: {p.recommendedSpecialist}</p></td>
           </tr>
         ))}
+        </tbody>
       </table>
 
       <h2>Appointments</h2>
       <table border="1">
-        <tr><th>Patient</th><th>Doctor</th><th>Date</th></tr>
+        <thead>
+        <tr><th>Patient</th><th>Doctor</th><th>Date</th></tr></thead>
+        <tbody>
         {appointments.map(a => (
           <tr key={a._id}>
             <td>{a.patientName}</td>
@@ -99,11 +122,14 @@ function App() {
             <td>{a.date}</td>
           </tr>
         ))}
+        </tbody>
       </table>
 
       <h2>Claims</h2>
       <table border="1">
-        <tr><th>Patient</th><th>Insurance</th><th>Amount</th></tr>
+        <thead>
+        <tr><th>Patient</th><th>Insurance</th><th>Amount</th></tr></thead>
+        <tbody>
         {claims.map(c => (
           <tr key={c._id}>
             <td>{c.patientName}</td>
@@ -111,6 +137,7 @@ function App() {
             <td>{c.claimAmount}</td>
           </tr>
         ))}
+        </tbody>
       </table>
 
     </div>
