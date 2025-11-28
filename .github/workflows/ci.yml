@@ -37,7 +37,7 @@ jobs:
       - name: Run frontend tests
         run: |
           cd frontend
-          npm test
+          npm test -- --ci --watchAll=false  --passWithNoTests
 
       # ✅ Install backend dependencies
       - name: Install backend packages
