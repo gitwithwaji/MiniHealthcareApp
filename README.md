@@ -1,6 +1,9 @@
 # MiniHealthcareApp
 This repository is a test demo for automating test cases on a Healthcare application. The repo is not a final version of any testing frameworks.
 
+# Project Screenshot
+![Patient Form](assets/patient-form.png)
+
 # Project Structure 
 
 ```healthcare-demo/                        # repo root (or keep as separate repos)
@@ -22,6 +25,25 @@ This repository is a test demo for automating test cases on a Healthcare applica
 │       ├── patientRoutes.js
 │       ├── appointmentRoutes.js
 │       └── claimRoutes.js
+├── frontend/                       # React frontend
+│   ├── package.json
+│   ├── public/
+│   │   ├── index.html
+│   │   └── favicon.ico
+│   │
+│   └── src/
+│       ├── index.js
+│       ├── App.js
+│       ├── App.css
+│       │
+│       ├── pages/
+│       │   ├── PatientRegistration.js
+│       │   ├── Appointments.js
+│       │   └── Claims.js
+│       │
+│       └── assets/
+│           └── patient-form.png   # Screenshots or sample images
+│
 healthcare-qa-automation/
 │   ├── pom.xml
 │   └── src/
@@ -51,9 +73,12 @@ healthcare-qa-automation/
 │       └── workflows/
 │           └── ci.yml
 └── docs/
-    ├── TestPlan_HealthcareDemo.md
-    ├── RTM_HealthcareDemo.xlsx (or .csv)
-    ├── TestCases_HealthcareDemo.md
-    ├── RiskRegister_HealthcareDemo.md
-    └── ValidationReport_HealthcareDemo.md
+    ├── TestPlan_MiniHealthcareApp.md
+    ├── RTM_MiniHealthcareApp.xlsx
+    ├── TestCases_MiniHealthcareApp.md
+    ├── RiskRegister_MiniHealthcareApp.md
+    ├── ValidationReport_MiniHealthcareApp.md
+    ├── TraceabilityMatrix_MiniHealthcareApp.md
+    ├── BugReportTemplate_MiniHealthcareApp.md
+    └── API_TestingGuide_MiniHealthcareApp.md   
 
