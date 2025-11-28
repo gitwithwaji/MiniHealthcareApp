@@ -49,6 +49,12 @@ jobs:
           npm install
           npm run build
 
+      - name: Cache frontend node modules
+        uses: actions/cache@v3
+        with:
+            path: frontend/node_modules
+            key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+
       # Setup ChromeDriver for headless Selenium tests
       - name: Setup ChromeDriver
         uses: nanasess/setup-chromedriver@v1
