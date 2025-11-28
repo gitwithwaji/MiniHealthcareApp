@@ -1,4 +1,4 @@
-name: MERN + Selenium CI
+name: CI Pipeline
 
 on:
   push:
@@ -10,59 +10,47 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      # Setup mongodb
-      mongo:
-        image: mongo:6.0
-        ports:
-          - 27017:27017
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Java for Maven
+      # ✅ Java Setup
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
-          cache: maven
 
-      # Set up Node.js for frontend/backend
+      # ✅ Node Setup (NO caching)
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
 
-      # Install backend dependencies (if any)
-      - name: Install backend
+      # ✅ Install frontend dependencies
+      - name: Install frontend packages
+        run: |
+          cd frontend
+          npm install
+
+      # ✅ Run frontend tests
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
+
+      # ✅ Install backend dependencies
+      - name: Install backend packages
         run: |
           cd backend
           npm install
 
-      # Install frontend dependencies and build
-      - name: Install frontend
+      # ✅ Run backend tests
+      - name: Run backend tests
         run: |
-          cd frontend
-          npm install
-          npm run build
+          cd backend
+          npm test
 
-      - name: Cache frontend node modules
-        uses: actions/cache@v3
-        with:
-            path: frontend/node_modules
-            key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
-
-      # Setup ChromeDriver for headless Selenium tests
-      - name: Setup ChromeDriver
-        uses: nanasess/setup-chromedriver@v1
-        with:
-          chromedriver-version: 'latest'
-
-      # Run Maven Selenium tests
-      - name: Run Maven Tests
-        run: |
-          cd tests  # <-- change this if your pom.xml is elsewhere
-          mvn clean test
+      # ✅ Maven tests for Selenium/TestNG
+      - name: Run Selenium Tests
+        run: mvn clean test
